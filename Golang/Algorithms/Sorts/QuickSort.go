@@ -40,9 +40,9 @@ func Sort2(nums []int) {
 }
 
 func quickSort2(nums []int, low, high int) {
-    if low >= high {
-        return
-    }
+	if low >= high {
+		return
+	}
 	pivot := nums[high]
 	storeIdx := low
 	i := low
@@ -54,45 +54,45 @@ func quickSort2(nums []int, low, high int) {
 		i++
 	}
 	nums[storeIdx], nums[high] = nums[high], nums[storeIdx]
-	quickSort2(nums, low, storeIdx - 1)
-	quickSort2(nums, storeIdx + 1, high)
+	quickSort2(nums, low, storeIdx-1)
+	quickSort2(nums, storeIdx+1, high)
 }
 
 /*
 concurrent quick sort implementation
 */
 func concurrentSort(nums []int) {
-    chanReceive := make(chan int)
-    defer close(chanReceive)
-    go concurrentQuickSort(nums, 0, len(nums) - 1, chanReceive)
-    <-chanReceive
+	chanReceive := make(chan int)
+	defer close(chanReceive)
+	go concurrentQuickSort(nums, 0, len(nums)-1, chanReceive)
+	<-chanReceive
 }
 
 func concurrentQuickSort(nums []int, low, high int, chanSend chan int) {
-    if low >= high {
-        chanSend <- 0
-        return
-    }
+	if low >= high {
+		chanSend <- 0
+		return
+	}
 
-    i := low
-    pivot := nums[high]
-    storeIdx := low
-    for ;i < high; i++ {
-        if nums[i] < pivot {
-            nums[storeIdx], nums[i] = nums[i], nums[storeIdx]
-            storeIdx++
-        }
-    }
-    nums[storeIdx], nums[high] = nums[high], nums[storeIdx]
+	i := low
+	pivot := nums[high]
+	storeIdx := low
+	for ; i < high; i++ {
+		if nums[i] < pivot {
+			nums[storeIdx], nums[i] = nums[i], nums[storeIdx]
+			storeIdx++
+		}
+	}
+	nums[storeIdx], nums[high] = nums[high], nums[storeIdx]
 
-    chanReceive := make(chan int)
-    defer close(chanReceive)
-    go concurrentQuickSort(nums, low, storeIdx - 1, chanReceive)
-    go concurrentQuickSort(nums, storeIdx + 1, high, chanReceive)
-    <-chanReceive
-    <-chanReceive
-    chanSend <- 0
-    return
+	chanReceive := make(chan int)
+	defer close(chanReceive)
+	go concurrentQuickSort(nums, low, storeIdx-1, chanReceive)
+	go concurrentQuickSort(nums, storeIdx+1, high, chanReceive)
+	<-chanReceive
+	<-chanReceive
+	chanSend <- 0
+	return
 }
 
 func main() {
@@ -104,7 +104,7 @@ func main() {
 	Sort2(nums2)
 	fmt.Println(nums2)
 
-    nums3 := []int{4, 3, 5, 6, 2}
-    concurrentSort(nums3)
-    fmt.Println(nums3)
+	nums3 := []int{4, 3, 5, 6, 2}
+	concurrentSort(nums3)
+	fmt.Println(nums3)
 }
