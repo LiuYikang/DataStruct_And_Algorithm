@@ -1,8 +1,4 @@
-package main
-
-import (
-	"fmt"
-)
+package sort
 
 /*
 quick sort implementation one
@@ -93,18 +89,4 @@ func concurrentQuickSort(nums []int, low, high int, chanSend chan int) {
 	<-chanReceive
 	chanSend <- 0
 	return
-}
-
-func main() {
-	nums1 := []int{4, 3, 5, 6, 2}
-	Sort1(nums1)
-	fmt.Println(nums1)
-
-	nums2 := []int{4, 3, 5, 6, 2}
-	Sort2(nums2)
-	fmt.Println(nums2)
-
-	nums3 := []int{4, 3, 5, 6, 2}
-	concurrentSort(nums3)
-	fmt.Println(nums3)
 }
