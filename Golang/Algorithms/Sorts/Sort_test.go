@@ -15,7 +15,7 @@ func CheckResult(nums []int) bool {
 
 func TestHeapSort(t *testing.T) {
 	nums := []int{2, 4, 3, 1, 5, 6}
-	heapSort(nums)
+	HeapSort(nums)
 	if CheckResult(nums) == false {
 		t.Fail()
 	}
@@ -65,6 +65,14 @@ func TestInsertSort(t *testing.T) {
 	nums := []int{2, 4, 3, 1, 5, 6}
 	InsertSort(nums)
 	if CheckResult(nums) == false {
+		t.Fail()
+	}
+}
+
+func TestMergeSort(t *testing.T) {
+	nums := []int{2, 4, 3, 1, 5, 6}
+	newNums := MergeSort(nums)
+	if CheckResult(newNums) == false {
 		t.Fail()
 	}
 }

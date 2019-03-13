@@ -1,6 +1,6 @@
 package sort
 
-func heapSort(nums []int) {
+func HeapSort(nums []int) {
 	length := len(nums)
 	first := length/2 - 1
 	for i := first; i >= 0; i-- {
